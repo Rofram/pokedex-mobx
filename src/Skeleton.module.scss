@@ -1,0 +1,24 @@
+@mixin animate($animation, $duration, $method, $times) {
+  animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name){
+  @keyframes #{$name}{
+      @content;
+  }
+}
+
+.skeleton {
+  @include keyframes(pulse) {
+    0% {
+      background-color: lightgray;
+    }
+    66% {
+      background-color: gray;
+    }
+    100% {
+      background-color: lightgray;
+    }
+  }
+  @include animate(pulse, 1s, linear, infinite);
+}
