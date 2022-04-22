@@ -7,7 +7,7 @@ export const detailsFetcher = (name: string) => async () => {
     return {...details, names: species.names};
 }
 
-export const listFetcher = () => async ({ pageParam = 0 }) => {
-  const list = await fetch(`${BASE_URL}/pokemon?offset=${pageParam}&limit=${100}`).then(res => res.json());
-  return list.results;
+export const listFetcher = (offset: number, limit: number) => async ({ pageParam = 0 }) => {
+  const res = await fetch(`${BASE_URL}/pokemon?offset=${pageParam != 0 ? (pageParam + offset) * limit : offset}&limit=${limit}`).then(res => res.json());
+  return { ...res, page: pageParam };
 }
